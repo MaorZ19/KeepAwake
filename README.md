@@ -1,6 +1,6 @@
 <p align="center"><img src="docs/logo.png" width="150" alt="KeepAwake logo"></p>
 
-# ☕ KeepAwake
+# ☀️ KeepAwake
 
 **One-click menu bar toggle that keeps your Mac awake.**
 
@@ -8,11 +8,11 @@ Born from running [Claude Code](https://claude.com/claude-code) agents overnight
 
 ![KeepAwake in the menu bar](docs/menubar.png)
 
-Filled cup ☕ = your Mac stays awake. Dimmed empty cup = normal sleep.
+Full sun ☀️ = your Mac stays awake. Zzz moon 🌙 = normal sleep.
 
 ## Features
 
-- **One click.** Left-click the cup to toggle. No Terminal, no menus to dig through.
+- **One click.** Left-click the sun/moon to toggle. No Terminal, no menus to dig through.
 - **Native and tiny.** A single-file AppKit app, ~200 lines of Swift. No dependencies, no Electron, no background helpers.
 - **Powered by `caffeinate`.** Uses macOS's own `caffeinate -ims` under the hood — prevents idle, disk, and system sleep. The *display* is still allowed to sleep, so overnight runs don't burn power on a lit screen.
 - **Self-healing.** If something kills the `caffeinate` process, KeepAwake restarts it. If KeepAwake itself is force-quit, `caffeinate` exits with it (`-w <pid>`), so nothing is ever left silently holding your Mac awake.
@@ -35,8 +35,8 @@ open /Applications/KeepAwake.app
 
 | Action | Result |
 |---|---|
-| **Left-click** the cup | Toggle awake mode on/off |
-| **Right-click** the cup | Menu: current state, Start at Login, Quit |
+| **Left-click** the icon | Toggle awake mode on/off |
+| **Right-click** the icon | Menu: current state, Start at Login, Quit |
 
 > **Battery note:** macOS always sleeps when the lid is closed on battery power — `caffeinate` can't override that. Plug in for overnight runs.
 

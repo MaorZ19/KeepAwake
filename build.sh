@@ -13,7 +13,7 @@ APP="$INSTALL_DIR/$APP_NAME.app"
 
 SDK_MAJOR=$(xcrun --show-sdk-version | cut -d. -f1)
 BUNDLE="build/$APP_NAME.app"
-APPEX="$BUNDLE/Contents/Extensions/$EXT_NAME.appex"
+APPEX="$BUNDLE/Contents/PlugIns/$EXT_NAME.appex"
 
 mkdir -p build
 rm -rf "$BUNDLE"
@@ -32,7 +32,8 @@ else
 	swiftc -O -D NO_CONTROL_CENTER main.swift shared.swift -o "$BUNDLE/Contents/MacOS/$APP_NAME"
 fi
 
-# App icon (regenerate docs/logo.png with: swift make-icon.swift)
+# App icon (regenerate docs/logo.png from the SVG source with:
+#   qlmanage -t -s 1024 -o docs docs/logo.svg && mv docs/logo.svg.png docs/logo.png)
 if [ -f docs/logo.png ]; then
 	ICONSET="build/AppIcon.iconset"
 	rm -rf "$ICONSET"; mkdir -p "$ICONSET"
@@ -54,6 +55,6 @@ cp -R "$BUNDLE" "$APP"
 
 # Make LaunchServices/PlugInKit notice the app (and extension, if built).
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$APP"
-[ -d "$APP/Contents/Extensions/$EXT_NAME.appex" ] && pluginkit -a "$APP/Contents/Extensions/$EXT_NAME.appex" 2>/dev/null || true
+[ -d "$APP/Contents/PlugIns/$EXT_NAME.appex" ] && pluginkit -a "$APP/Contents/PlugIns/$EXT_NAME.appex" 2>/dev/null || true
 
 echo "Installed: $APP"

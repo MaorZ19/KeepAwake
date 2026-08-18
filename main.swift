@@ -72,11 +72,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func updateIcon() {
         let enabled = SharedState.isEnabled
         let desc = enabled ? "Keep awake on" : "Keep awake off"
-        // Steaming cup (macOS 14+), plain cup as fallback on macOS 13.
-        let image = NSImage(systemSymbolName: enabled ? "cup.and.heat.waves.fill" : "cup.and.heat.waves",
+        // Full sun = Mac stays awake; zzz moon = normal sleep.
+        let image = NSImage(systemSymbolName: enabled ? "sun.max.fill" : "moon.zzz.fill",
                             accessibilityDescription: desc)
-            ?? NSImage(systemSymbolName: enabled ? "cup.and.saucer.fill" : "cup.and.saucer",
-                       accessibilityDescription: desc)
         image?.isTemplate = true
         statusItem.button?.image = image
         statusItem.button?.appearsDisabled = !enabled
