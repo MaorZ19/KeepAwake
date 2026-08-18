@@ -38,7 +38,15 @@ open /Applications/KeepAwake.app
 | **Left-click** the icon | Toggle awake mode on/off |
 | **Right-click** the icon | Menu: current state, Start at Login, Quit |
 
-> **Battery note:** macOS always sleeps when the lid is closed on battery power — `caffeinate` can't override that. Plug in for overnight runs.
+## Power & battery — by design
+
+| Situation | Behavior with KeepAwake on |
+|---|---|
+| On AC power | Mac stays awake — even with the lid closed |
+| On battery, lid **open** | Mac stays awake (idle sleep is blocked) |
+| On battery, lid **closed** | **Mac sleeps.** macOS enforces this; no app can override it |
+
+The battery-lid-closed case is a conscious decision, not a gap: KeepAwake rides macOS's own `caffeinate` assertions and deliberately doesn't fight the OS. Silently draining a closed MacBook's battery to keep background jobs alive is exactly the failure mode you *don't* want — if the battery dies mid-run, your overnight job is gone anyway, plus you start the morning at 0%. For overnight agent runs: plug in.
 
 ## How it works
 
