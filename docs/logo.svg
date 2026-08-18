@@ -16,9 +16,9 @@
       <stop offset="0.46" stop-color="#ffd45c"/>
       <stop offset="1" stop-color="#ff8c3f"/>
     </linearGradient>
-    <linearGradient id="moon" x1="570" y1="330" x2="736" y2="700" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f4f4ff"/>
-      <stop offset="0.52" stop-color="#c8d1ff"/>
+    <linearGradient id="moon" x1="540" y1="330" x2="800" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8f8ff"/>
+      <stop offset="0.52" stop-color="#ccd4ff"/>
       <stop offset="1" stop-color="#8e9be8"/>
     </linearGradient>
     <linearGradient id="rim" x1="180" y1="100" x2="790" y2="930" gradientUnits="userSpaceOnUse">
@@ -29,15 +29,20 @@
     <filter id="tileShadow" x="20" y="20" width="984" height="1004" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#09031f" flood-opacity="0.36"/>
     </filter>
-    <filter id="sunGlow" x="212" y="280" width="488" height="488" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="sunGlow" x="182" y="250" width="548" height="548" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="10" stdDeviation="22" flood-color="#ff9b3d" flood-opacity="0.50"/>
     </filter>
-    <filter id="moonShadow" x="490" y="270" width="342" height="500" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="moonShadow" x="400" y="240" width="520" height="560" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="13" stdDeviation="18" flood-color="#05031f" flood-opacity="0.42"/>
     </filter>
     <clipPath id="tileClip">
       <rect x="64" y="64" width="896" height="896" rx="200"/>
     </clipPath>
+    <mask id="crescent" maskUnits="userSpaceOnUse" x="0" y="0" width="1024" height="1024">
+      <rect x="0" y="0" width="1024" height="1024" fill="black"/>
+      <circle cx="648" cy="512" r="196" fill="white"/>
+      <circle cx="560" cy="486" r="180" fill="black"/>
+    </mask>
   </defs>
 
   <g filter="url(#tileShadow)">
@@ -65,9 +70,9 @@
       <circle cx="426" cy="512" r="184" fill="url(#sun)" filter="url(#sunGlow)"/>
       <circle cx="378" cy="458" r="82" fill="#fffbd0" opacity="0.16"/>
 
-      <path d="M665 319c-82 28-141 105-141 196 0 115 93 208 208 208 25 0 49-4 72-13-45 56-114 92-191 92-135 0-244-109-244-244 0-126 95-230 217-243 27-3 54-1 79 4z" fill="url(#moon)" filter="url(#moonShadow)"/>
-      <path d="M665 319c-82 28-141 105-141 196 0 115 93 208 208 208 25 0 49-4 72-13-45 56-114 92-191 92-135 0-244-109-244-244 0-126 95-230 217-243 27-3 54-1 79 4z" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="5"/>
-      <path d="M485 368c-44 43-71 103-71 169 0 119 87 217 201 235-106 1-191-85-191-191 0-89 61-164 143-185-30-10-58-19-82-28z" fill="#ffffff" opacity="0.10"/>
+      <g filter="url(#moonShadow)">
+        <circle cx="648" cy="512" r="196" fill="url(#moon)" mask="url(#crescent)"/>
+      </g>
 
       <rect x="75" y="75" width="874" height="874" rx="189" fill="none" stroke="url(#rim)" stroke-width="22"/>
     </g>
