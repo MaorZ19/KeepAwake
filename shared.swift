@@ -1,20 +1,19 @@
 // State shared between the menu bar app and the Control Center widget
-// extension — two separate processes. The widget runs sandboxed, so the
-// state lives as a JSON file in the app group container (the one location
-// both processes can reach), synced via a distributed notification.
+// extension — two separate processes, synced via a JSON file plus a
+// distributed notification. The file deliberately lives in Application
+// Support and NOT in an app group container: macOS 26 gates undeclared
+// access to sandboxed apps' group containers behind a TCC consent prompt
+// that blocks open() — which froze the app at launch. The sandboxed widget
+// reaches this path through a temporary-exception entitlement instead.
 import Foundation
 
 enum SharedState {
-    static let groupID = "group.com.maor.keepawake"
     static let controlKind = "com.maor.KeepAwakeBar.control"
     static let changedNote = Notification.Name("com.maor.keepawake.changed")
 
     private static var stateURL: URL {
-        let base = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: groupID)
-            ?? FileManager.default.homeDirectoryForCurrentUser
-                .appendingPathComponent("Library/Group Containers/\(groupID)")
-        return base.appendingPathComponent("state.json")
+        FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Application Support/KeepAwake/state.json")
     }
 
     static var isEnabled: Bool {
